@@ -4,12 +4,10 @@
 // construct to `Option` that can be used to express error conditions. Change
 // the function signature and body to return `Result<String, String>` instead
 // of `Option<String>`.
-fn generate_nametag_text(name: String) -> Option<String> {
-    if name.is_empty() {
-        // Empty names aren't allowed
-        None
-    } else {
-        Some(format!("Hi! My name is {name}"))
+fn generate_nametag_text(name: String) -> Result<String, String> {
+    match name.as_str() {
+        "" => Err("Empty names aren't allowed".to_string()),
+        _ => Ok(format!("Hi! My name is {name}")),
     }
 }
 
